@@ -1,0 +1,53 @@
+<div class="ps-product m-2">
+  <div class="ps-product__thumbnail"><a href="product-default.html">
+      <img class="product_img" src="{{ product.image_file }}" alt=""></a>
+    <div class="ps-product__badge m-2" *ngIf="product.showDiscount()">{{ product.getDiscountValue() }}%</div>
+    <div class="ps-product__badge m-2 bg-primary" *ngIf="product.newly_published">New</div>
+
+    <!-- product actions -->
+    <ul class="ps-product__actions">
+      <!-- add to cart -->
+      <li (click)="product.addToCart('123')">
+        <a class="cursor" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+          <i class="icon-bag2"></i>
+        </a>
+      </li>
+
+      <!-- view item -->
+      <li><a class="cursor" data-placement="top" title="View" data-toggle="modal" data-target="#product-quickview"><i
+            class="icon-eye"></i></a></li>
+
+      <!-- add to wishlist -->
+      <li><a class="cursor" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- product details -->
+  <div class="ps-product__container"><a class="ps-product__vendor" href="#">{{ product.entity_name }}</a>
+    <div class="ps-product__content">
+      <a class="ps-product__title" href="product-default.html">
+        {{ product.product_name }}
+      </a>
+      <ng-container *ngIf="product.showDiscount();else originalValue">
+        <p class="ps-product__price sale">{{ product.currency }} {{ product.discount_amount }} <del>{{ product.price }}
+          </del></p>
+      </ng-container>
+      <ng-template #originalValue>
+        <p class="ps-product__price sale">{{ product.currency }} {{ product.price }}</p>
+      </ng-template>
+    </div>
+    <div class="ps-product__content hover">
+      <a class="ps-product__title" href="product-default.html">
+        {{ product.product_name }}
+      </a>
+      <ng-container *ngIf="product.showDiscount();else originalValue">
+        <p class="ps-product__price sale">{{ product.currency }} {{ product.discount_amount }} <del>{{ product.price }}
+          </del></p>
+      </ng-container>
+      <ng-template #originalValue>
+        <p class="ps-product__price sale">{{product.currency}} {{ product.price }}</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

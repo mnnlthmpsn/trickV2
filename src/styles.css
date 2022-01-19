@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext');
+@import 'assets/addons/font-awesome/css/font-awesome.min.css';
+@import 'assets/fonts/Linearicons/Linearicons/Font/demo-files/demo.css';
+@import 'assets/addons/bootstrap/css/bootstrap.min.css';
+@import 'assets/addons/owl-carousel/assets/owl.carousel.min.css';
+@import 'assets/addons/owl-carousel/assets/owl.theme.default.min.css';
+@import 'assets/addons/slick/slick/slick.css';
+@import 'assets/addons/nouislider/nouislider.min.css';
+@import 'assets/addons/lightGallery-master/dist/css/lightgallery.min.css';
+@import 'assets/addons/jquery-bar-rating/dist/themes/fontawesome-stars.css';
+@import 'assets/addons/select2/dist/css/select2.min.css';
+@import 'assets/css/style.css';
+@import 'assets/css/trickles.css';
+@import 'assets/css/market-place-1.css';
+
+.cursor {
+  cursor: pointer;
+}

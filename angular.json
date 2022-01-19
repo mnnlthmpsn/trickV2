@@ -27,9 +27,28 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/addons/jquery.min.js",
+              "src/assets/addons/nouislider/nouislider.min.js",
+              "src/assets/addons/popper.min.js",
+              "src/assets/addons/bootstrap/js/bootstrap.min.js",
+              "src/assets/addons/imagesloaded.pkgd.min.js",
+              "src/assets/addons/masonry.pkgd.min.js",
+              "src/assets/addons/isotope.pkgd.min.js",
+              "src/assets/addons/jquery.matchHeight-min.js",
+              "src/assets/addons/slick/slick/slick.min.js",
+              "src/assets/addons/jquery-bar-rating/dist/jquery.barrating.min.js",
+              "src/assets/addons/slick-animation.min.js",
+              "src/assets/addons/lightGallery-master/dist/js/lightgallery-all.min.js",
+              "src/assets/addons/sticky-sidebar/dist/sticky-sidebar.min.js",
+              "src/assets/addons/select2/dist/js/select2.full.min.js",
+              "src/assets/addons/gmap3.min.js",
+              "src/assets/js/main.js",
+              "src/assets/js/common.js"
+            ]
           },
           "configurations": {
             "production": {

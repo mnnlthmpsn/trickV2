@@ -1,0 +1,5 @@
+.banner_img {
+  height: 60vh;
+  object-fit: fill;
+  object-position: center;
+}

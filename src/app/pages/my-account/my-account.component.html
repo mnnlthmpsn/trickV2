@@ -1,0 +1,151 @@
+<div class="ps-page--my-account">
+  <div class="ps-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li>My account</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ps-my-account-2">
+    <div class="container">
+      <div class="ps-section__wrapper row d-flex align-items-start">
+        <div class="col-12 col-lg-7">
+          <div class="ps-form--account ps-tab-root">
+            <ul class="ps-tab-list">
+              <li class="active"><a href="#sign-in">Login</a></li>
+              <li><a href="#register">Register</a></li>
+            </ul>
+            <div class="ps-tabs">
+              <div class="ps-tab active" id="sign-in">
+                <form class="ps-form__content" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                  <h5>Log In</h5>
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="form-control" formControlName="username" type="text" autocomplete="off"
+                      placeholder="Username or email address">
+                      <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="alert">
+                        <p class="text-danger" *ngIf="username?.errors?.['required']">
+                        Please enter Username
+                        </p>
+                    </div>
+                  </div>
+                  <div class="form-group form-forgot">
+                    <label for="password">PIN</label>
+                    <input class="form-control" formControlName="password" type="password" placeholder="*****" minlength="5" maxlength="5" autocomplete="off">
+                      <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="alert">
+                        <p class="text-danger" *ngIf="password?.errors?.['required'] || password?.errors?.['minlength']">Please enter 5 Digit PIN</p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <a href="" class="text-primary">Forgot Password ?</a>
+                  </div>
+                  <div class="form-group submit">
+                    <button class="ps-btn ps-btn--fullwidth" type="submit"
+                      *ngIf="loginForm.valid;else invalidForm">Login</button>
+                    <ng-template #invalidForm>
+                      <button class="ps-btn ps-btn--fullwidth bg-secondary" type="button"
+                        style="cursor: not-allowed;">Login</button>
+                    </ng-template>
+                  </div>
+                </form>
+              </div>
+              <div class="ps-tab" id="register">
+                <form class="ps-form__content" [formGroup]="registerForm" (ngSubmit)="onRegister()" autocomplete="off">
+                  <h5>Create a new account</h5>
+                  <div class="row">
+                    <div class="col-12 col-md-6 form-group">
+                      <label for="Other Names">Other Names</label>
+                      <input class="form-control" type="text" placeholder="eg: Emmanuel Ntiamoah" formControlName="other_names">
+                      <div *ngIf="other_names?.invalid && (other_names?.dirty || other_names?.touched)" class="alert">
+                        <p class="text-danger" *ngIf="other_names?.errors?.['required']">* Othernames are required</p>
+                    </div>
+                    </div>
+                    <div class="col-12 col-md-6 form-group">
+                      <label for="surname">Surname</label>
+                      <input class="form-control" type="text" placeholder="eg: Thompson*" formControlName="surname">
+                      <div *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)" class="alert">
+                        <p class="text-danger" *ngIf="surname?.errors?.['required']">* Surname is required</p>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-6 form-group">
+                      <label for="email">Email</label>
+                      <input class="form-control" type="email" placeholder="eg: sam@trickles.com" formControlName="email" required
+                        autocomplete="false">
+                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert">
+                          <p class="text-danger" *ngIf="email?.errors?.['required']">* Email is required</p>
+                          <p class="text-danger" *ngIf="email?.errors?.['email']">* Enter valid email</p>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 form-group">
+                      <label for="pin">5 Digit PIN</label>
+                      <input type="password" class="form-control" name="pin" pattern="[0-9]{5}" maxlength="5" minlength="5" autocomplete="off"
+                        placeholder="***" formControlName="pin">
+                        <div *ngIf="pin?.invalid && (pin?.dirty || pin?.touched)" class="alert">
+                          <p class="text-danger" *ngIf="pin?.errors?.['required']">* PIN is required</p>
+                          <p class="text-danger" *ngIf="pin?.errors?.['minlength']">* PIN length must be 5</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-6 form-group">
+                      <label for="phone">Phone</label>
+                      <input class="form-control" type="string" placeholder="0551231234" formControlName="phone" required maxlength="10" minlength="10" autocomplete="off">
+                      <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert">
+                        <p class="text-danger" *ngIf="phone?.errors?.['required']">* Phone is required</p>
+                    </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 form-group">
+                      <label for="referral_code">Referral Code</label>
+                      <input class="form-control" type="text" placeholder="Referral Code"
+                        formControlName="referral_code">
+                    </div>
+                  </div>
+
+                  <div class="form-group submit">
+                    <button class="ps-btn ps-btn--fullwidth" type="submit"
+                      *ngIf="registerForm.valid;else invalidRegForm">Register</button>
+                    <ng-template #invalidRegForm>
+                      <button class="ps-btn ps-btn--fullwidth bg-secondary" type="button"
+                        style="cursor: not-allowed;">Register</button>
+                    </ng-template>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 col-lg-5 d-sm-none d-lg-block bg-white">
+          <figure class="ps-section__desc position-sticky bg-white p-2">
+            <figcaption>Sign up today and you will be able to:</figcaption>
+            <ul class="ps-list">
+              <li><i class="icon-credit-card"></i><span>SPEED YOUR WAY THROUGH CHECKOUT</span></li>
+              <li><i class="icon-clipboard-check"></i><span>TRACK YOUR ORDERS EASILY</span></li>
+              <li><i class="icon-bag2"></i><span>KEEP A RECORD OF ALL YOUR PURCHASES</span></li>
+            </ul>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template let-modal #otpModal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Verify OTP</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); currentTime = 60;">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="row justify-content-center">
+        <input type="text" placeholder="hey">
+          <!-- <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6}"></ng-otp-input> -->
+      </div>
+      <p class="text-center py-2" *ngIf="currentTime > 0">{{ currentTime * 1000 | date:'mm:ss' }}</p>
+      <p class="text-center py-2" *ngIf="currentTime < 1">OTP code expired. <u role="button" style="cursor: pointer;" (click)="resendOTP()">Resend OTP</u></p>
+  </div>
+</ng-template>

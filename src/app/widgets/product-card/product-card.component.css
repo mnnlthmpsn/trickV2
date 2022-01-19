@@ -1,0 +1,10 @@
+.product_img {
+  height: 250px;
+  width: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cursor {
+  cursor: pointer;
+}

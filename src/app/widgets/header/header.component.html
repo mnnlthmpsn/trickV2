@@ -1,0 +1,270 @@
+<header class="header header--market-place-3" data-sticky="true">
+
+  <!-- on scroll -->
+  <div class="header__top border-bottom">
+    <div class="container">
+      <div class="header__left">
+        <div class="menu--product-categories">
+          <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Categories</span></div>
+          <div class="menu__content">
+            <ul class="menu--dropdown">
+              <li class="current-menu-item menu-item-has-children has-mega-menu"
+                *ngFor="let category of category_list_data">
+                <a href="#">
+                  <i class="icon-home"></i>
+                  {{ category.product_cat_desc }}
+                </a>
+                <div class="mega-menu">
+                  <div class="mega-menu__column">
+                    <h4>{{category.product_cat_desc}}</h4>
+                    <ul class="mega-menu__list">
+                      <li class="current-menu-item" *ngFor="let item of category.sub_info">
+                        <a href="#">{{ item.product_type_desc }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a class="ps-logo mainlogo" href="/">
+          <img src="assets/img/logo_light.png" alt="">
+        </a>
+      </div>
+
+      <!-- search -->
+      <div class="header__center">
+        <form class="ps-form--quick-search" action="index.html" method="get">
+          <input class="form-control" type="text" placeholder="I'm shopping for...">
+          <button>Search</button>
+        </form>
+      </div>
+
+
+      <div class="header__right">
+        <div class="header__actions">
+          <ng-container *ngIf="!!customer_id">
+            <a class="header__extra" href="/my-favorites" title="My Favorites">
+              <i class="icon-heart link"></i>
+              <span><i>{{fav_items_count}}</i></span>
+            </a>
+            <div class="ps-cart--mini">
+              <a class="header__extra" href="/shopping-cart" title="Shopping Basket">
+                <i class="icon-cart-full link"></i>
+                <span><i>{{basket_items_count}}</i></span>
+              </a>
+            </div>
+            <div class="ps-cart--mini">
+              <a class="header__extra" href="/shopping-my-items" title="My Confirmed Items">
+                <i class="icon-bag2 link"></i>
+                <span><i>{{confirmed_items_count}}</i></span>
+              </a>
+            </div>
+            <div class="vl"></div>
+          </ng-container>
+
+          <!-- login/register -->
+          <div class="ps-block--user-header">
+            <ng-container *ngIf="!!customer_id;else loginRegister">
+              <a href="/user-information">
+                <div class="ps-block__left">
+                  <i class="icon-user link"></i>
+                </div>
+              </a>
+            </ng-container>
+            <ng-template #loginRegister>
+              <div class="ps-block__right">
+                <a class="link" href="/my-account">Login/Register</a>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- on page -->
+  <nav class="navigation bg-white border-bottom">
+    <div class="container">
+      <div class="navigation__left">
+        <div class="menu--product-categories ">
+          <div class="menu__toggle deptmain py-3">
+            <i class="icon-menu text-dark"></i><span>Shop Categories</span>
+          </div>
+          <div class="menu__content">
+            <ul class="menu--dropdown">
+              <li class="current-menu-item menu-item-has-children has-mega-menu"
+                *ngFor="let category of category_list_data">
+                <a href="#">
+                  <i class="icon-home"></i>
+                  {{ category.product_cat_desc }}
+                </a>
+                <div class="mega-menu">
+                  <div class="mega-menu__column">
+                    <h4>{{category.product_cat_desc}}</h4>
+                    <ul class="mega-menu__list">
+                      <li class="current-menu-item" *ngFor="let item of category.sub_info">
+                        <a href="#">{{ item.product_type_desc }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="navigation__right">
+        <p class="w-100 text-right pt-2">Hotline</p>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- mobile nav -->
+<header class="header header--mobile" data-sticky="true">
+  <div class="header__top">
+    <div class="header__left">
+      <p>Welcome to Trickles!</p>
+    </div>
+    <div class="header__right">
+      <ul class="navigation__extra">
+        <li><a href="#">Sell on Trickles</a></li>
+        <li><a href="#">Track your order</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="navigation--mobile">
+    <div class="navigation__left"><a class="ps-logo" href="index.html"><img src="img/logo_light.png" alt=""></a></div>
+    <div class="navigation__right">
+      <div class="header__actions">
+        <div class="ps-cart--mini"><a class="header__extra" href="#"><i class="icon-bag2"></i><span><i>0</i></span></a>
+          <div class="ps-cart__content">
+            <div class="ps-cart__items">
+              <div class="ps-product--cart-mobile">
+                <div class="ps-product__thumbnail"><a href="#"><img src="img/products/clothing/7.jpg" alt=""></a></div>
+                <div class="ps-product__content"><a class="ps-product__remove" href="#"><i class="icon-cross"></i></a><a
+                    href="product-default.html">MVMTH Classical Leather Watch In Black</a>
+                  <p><strong>Sold by:</strong> YOUNG SHOP</p><small>1 x GHs 59.99</small>
+                </div>
+              </div>
+              <div class="ps-product--cart-mobile">
+                <div class="ps-product__thumbnail"><a href="#"><img src="img/products/clothing/5.jpg" alt=""></a></div>
+                <div class="ps-product__content"><a class="ps-product__remove" href="#"><i class="icon-cross"></i></a><a
+                    href="product-default.html">Sleeve Linen Blend Caro Pane Shirt</a>
+                  <p><strong>Sold by:</strong> YOUNG SHOP</p><small>1 x GHs 59.99</small>
+                </div>
+              </div>
+            </div>
+            <div class="ps-cart__footer">
+              <h3>Sub Total:<strong>GHs 59.99</strong></h3>
+              <figure><a class="ps-btn" href="shopping-cart.html">View Cart</a><a class="ps-btn"
+                  href="checkout.html">Checkout</a></figure>
+            </div>
+          </div>
+        </div>
+        <div class="ps-block--user-header">
+          <div class="ps-block__left"><i class="icon-user"></i></div>
+          <div class="ps-block__right">
+            <a href="/my-account" class="text-dark">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ps-search--mobile">
+    <form class="ps-form--search-mobile" action="index.html" method="get">
+      <div class="form-group--nest">
+        <input class="form-control" type="text" placeholder="Search something...">
+        <button><i class="icon-magnifier"></i></button>
+      </div>
+    </form>
+  </div>
+</header>
+
+<!-- shopping cart mobile -->
+<div class="ps-panel--sidebar" id="cart-mobile">
+  <div class="ps-panel__header">
+    <h3>Shopping Cart</h3>
+  </div>
+  <div class="navigation__content">
+    <div class="ps-cart--mobile">
+      <div class="ps-cart__content">
+        <div class="ps-product--cart-mobile">
+          <div class="ps-product__thumbnail"><a href="#"><img src="img/products/clothing/7.jpg" alt=""></a></div>
+          <div class="ps-product__content"><a class="ps-product__remove" href="#"><i class="icon-cross"></i></a><a
+              href="product-default.html">MVMTH Classical Leather Watch In Black</a>
+            <p><strong>Sold by:</strong> YOUNG SHOP</p><small>1 x GHs 59.99</small>
+          </div>
+        </div>
+      </div>
+      <div class="ps-cart__footer">
+        <h3>Sub Total:<strong>GHs 59.99</strong></h3>
+        <figure><a class="ps-btn" href="shopping-cart.html">View Cart</a><a class="ps-btn"
+            href="checkout.html">Checkout</a></figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- categories mobile -->
+<div class="ps-panel--sidebar" id="navigation-mobile">
+  <div class="ps-panel__header">
+    <h3>Categories</h3>
+  </div>
+  <div class="ps-panel__content">
+    <ul class="menu--mobile">
+      <li class="current-menu-item menu-item-has-children has-mega-menu" *ngFor="let category of category_list_data"><a
+          href="#">{{ category.product_cat_desc }}</a><span class="sub-toggle"></span>
+        <div class="mega-menu">
+          <div class="mega-menu__column">
+      <li class="current-menu-item py-1" *ngFor="let item of category.sub_info"><a href="#">{{ item.product_type_desc
+          }}</a>
+      </li>
+  </div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+<!-- mobile menu items -->
+<div class="navigation--list">
+  <div class="navigation__content"><a class="navigation__item ps-toggle--sidebar" href="#menu-mobile"><i
+        class="icon-menu"></i><span> Menu</span></a><a class="navigation__item ps-toggle--sidebar"
+      href="#navigation-mobile"><i class="icon-list4"></i><span> Categories</span></a><a
+      class="navigation__item ps-toggle--sidebar" href="#search-sidebar"><i class="icon-magnifier"></i><span>
+        Search</span></a><a class="navigation__item ps-toggle--sidebar" href="#cart-mobile"><i
+        class="icon-bag2"></i><span> Cart</span></a></div>
+</div>
+
+<!-- mobile search -->
+<div class="ps-panel--sidebar" id="search-sidebar">
+  <div class="ps-panel__header">
+    <form class="ps-form--search-mobile" action="index.html" method="get">
+      <div class="form-group--nest">
+        <input class="form-control" type="text" placeholder="Search something...">
+        <button><i class="icon-magnifier"></i></button>
+      </div>
+    </form>
+  </div>
+  <div class="navigation__content"></div>
+</div>
+
+<!-- menu items -->
+<div class="ps-panel--sidebar" id="menu-mobile">
+  <div class="ps-panel__header">
+    <h3>Menu</h3>
+  </div>
+  <div class="ps-panel__content">
+    <ul class="menu--mobile">
+      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
+      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
+      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
+      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
+      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
+    </ul>
+  </div>
+</div>
