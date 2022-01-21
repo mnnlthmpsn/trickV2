@@ -1,7 +1,3 @@
-import { Injectable } from "@angular/core"
-import { TricklesService } from "../services/trickles.service"
-
-
 export class Product {
   constructor(
     public currency?: string,
@@ -65,9 +61,5 @@ export class Product {
 
   showDiscount(): boolean {
     return parseFloat(this.discount_value!) > 0 ? true : false
-  }
-
-  addToCart(customer_id: string): void {
-    console.log('adding product to cart for ' + customer_id)
   }
 }

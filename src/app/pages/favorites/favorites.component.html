@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="ps-page--simple">
+  <div class="ps-breadcrumb">
+      <div class="container">
+          <ul class="breadcrumb">
+              <li><a href="index">Home</a></li>
+              <!-- <li><a href="shop-default">Shop</a></li> -->
+              <li>Favorites</li>
+          </ul>
+      </div>
+  </div>
+  <div class="ps-section--shopping ps-whishlist">
+      <div class="container">
+          <div class="ps-section__header ps-shopping-favorite">
+              <h1>Favorites</h1>
+          </div>
+          <div class="ps-section__content">
+              <div class="table-responsive col-sm-10 offset-sm-1">
+                  <table class="table ps-table--whishlist">
+                      <!-- <thead>
+                          <tr>
+                              <th>Product</th>
+                              <th>Action</th>
+                              <th></th>
+                          </tr>
+                      </thead> -->
+
+                      <tbody style="border: 1px;">
+                          <ng-container *ngIf="favorites_array_list.length;else emptyFavoriteList">
+                              <tr *ngFor="let item of favorites_array_list">
+                                  <!-- <td><a href="#"><i class="icon-cross"></i></a></td> -->
+                                  <td>
+                                      <a href="/product-details?info_id={{item.product_info_id}}">
+                                          <div class="ps-product--cart">
+                                              <div class="ps-product__thumbnail">
+                                                  <img src="{{item?.image_file}}" alt="{{item?.product_name}}"
+                                                      class="rounded">
+                                              </div>
+                                              <div class="ps-product__content">
+                                                  <p style="font-size: large; color: black; font-weight: 500;">
+                                                      {{item?.product_name}}</p>
+                                                  <p
+                                                      style="font-size: larger; font-weight: bolder; color: rgb(8, 109, 241); ">
+                                                      {{item?.currency}} {{item?.price}}</p>
+                                                  <p style="font-size: small; color: #282828; font-weight: 500;">
+                                                      {{item?.entity_name}}</p>
+
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </td>
+                                  <td>
+                                      <button class="ps-btn"
+                                          (click)="removeFromFav(item)">Remove</button>
+                                  </td>
+                              </tr>
+                          </ng-container>
+                          <ng-template #emptyFavoriteList>
+                              <div class="row justify-content-center">
+                                  <p class="text-center" colspan="6">No items added to <strong>Favorites</strong></p>
+                              </div>
+                          </ng-template>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<app-footer></app-footer>

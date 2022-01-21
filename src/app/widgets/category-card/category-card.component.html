@@ -1,0 +1,20 @@
+<!-- category -->
+<div class="ps-product">
+  <div class="ps-product__thumbnail">
+    <span class="cursor" (click)="navigateToCategoryDetails()">
+      <img class="cat_img" src="{{ category.image_file }}" alt="">
+    </span>
+  </div>
+
+  <!-- category details -->
+  <div class="ps-product__container">
+    <div class="ps-product__content">
+      <a class="ps-product__title text-center cursor" role="link" (click)="navigateToCategoryDetails">{{ category.product_cat_desc }}</a>
+    </div>
+    <div class="ps-product__content hover">
+      <a class="ps-product__title text-center cursor" (click)="navigateToCategoryDetails">{{ category.product_cat_desc }}</a>
+    </div>
+  </div>
+</div>
+
+

@@ -1,14 +1,16 @@
 <div class="trending">
   <div class="container">
     <div class="ps-section__header">
-      <h3>Most Viewed Items<span></span></h3>
+      <h3>Top Categories<span></span></h3>
     </div>
-    <owl-carousel-o [options]="carouselOptions" id="banner">
-      <ng-container *ngFor="let image of [1,2,3,4,5]">
-          <ng-template carouselSlide [id]="image.toString()">
-              <app-product-card></app-product-card>
+    <div class="bg-white p-5">
+      <owl-carousel-o [options]="carouselOptions" id="banner">
+        <ng-container *ngFor="let category of top_categories_array_list">
+          <ng-template carouselSlide [id]="category.product_cat_id.toString()">
+            <app-category-card [category]="category"></app-category-card>
           </ng-template>
-      </ng-container>
-  </owl-carousel-o>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
   </div>
 </div>

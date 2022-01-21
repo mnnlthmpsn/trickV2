@@ -1,0 +1,26 @@
+.ps-shopping-cart {
+  margin-top: -50px;
+}
+
+ng-sidebar-container {
+  height: 100vh;
+}
+
+::ng-deep .ng-sidebar {
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 90vw;
+  height: 70vh;
+  margin: auto;
+  padding: 2em 3em;
+  position: inherit;
+  z-index: 99999 !important;
+}
+
+#bottomsheet-footer {
+  width: 90vw;
+  margin: auto;
+  padding: 1em 2em;
+  background-color: white
+}

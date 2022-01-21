@@ -1,3 +1,6 @@
+.link {
+  color: black !important;
+}
 .link:hover {
   color: #2F80ED !important;
 }

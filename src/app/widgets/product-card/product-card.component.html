@@ -1,24 +1,26 @@
-<div class="ps-product m-2">
+<div class="ps-product mb-5">
   <div class="ps-product__thumbnail"><a href="product-default.html">
       <img class="product_img" src="{{ product.image_file }}" alt=""></a>
-    <div class="ps-product__badge m-2" *ngIf="product.showDiscount()">{{ product.getDiscountValue() }}%</div>
-    <div class="ps-product__badge m-2 bg-primary" *ngIf="product.newly_published">New</div>
+    <div class="ps-product__badge dis_badge m-2" *ngIf="product.showDiscount()">{{ product.getDiscountValue() }}%</div>
+    <div class="ps-product__badge bg-primary new_badge m-2" *ngIf="product.newly_published">New</div>
 
     <!-- product actions -->
     <ul class="ps-product__actions">
       <!-- add to cart -->
-      <li (click)="product.addToCart('123')">
+      <li (click)="addToCart()">
         <a class="cursor" data-toggle="tooltip" data-placement="top" title="Add to Cart">
           <i class="icon-bag2"></i>
         </a>
       </li>
 
       <!-- view item -->
-      <li><a class="cursor" data-placement="top" title="View" data-toggle="modal" data-target="#product-quickview"><i
+      <li>
+        <a class="cursor" data-placement="top" title="View" data-toggle="tooltip"><i
             class="icon-eye"></i></a></li>
 
       <!-- add to wishlist -->
-      <li><a class="cursor" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a>
+      <li (click)="addToFavorites()">
+        <a class="cursor" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a>
       </li>
     </ul>
   </div>

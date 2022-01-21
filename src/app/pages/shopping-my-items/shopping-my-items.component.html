@@ -1,0 +1,330 @@
+<ng-sidebar-container [animate]="true">
+  <!-- Page content -->
+  <div ng-sidebar-content>
+
+    <!-- <app-home-sidebar></app-home-sidebar> -->
+    <app-header></app-header>
+    <div class="ps-page--simple">
+      <div class="ps-breadcrumb">
+        <div class="container">
+          <ul class="breadcrumb">
+            <li><a href="index">Home</a></li>
+            <li><a href="shop-default">Shop</a></li>
+            <li>My Items</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ps-section--shopping ps-shopping-cart">
+        <div class="container">
+          <h3 class="text-center">My Items</h3>
+
+          <div class="ps-section__content">
+            <div class="ps-block--categories-tabs ps-tab-root">
+              <div class="ps-block__header">
+                <div class="ps-carousel--nav ps-tab-list row d-flex">
+                  <a class="col-6 cursor" [class.active]="currentTab=='pending'"(click)="activeTab('pending')">
+                    <i class="icon-clock"></i>
+                    <span>PENDING ITEMS</span>
+                  </a>
+                  <a class="col-6 cursor" [class.active]="currentTab=='completed'" (click)="activeTab('completed')">
+                    <i class="icon-checkmark-circle"></i>
+                    <span>COMPLETED ITEMS</span>
+                  </a>
+                </div>
+              </div>
+              <div class="ps-tabs">
+                <div class="ps-tabs">
+                  <div class="ps-tab active" *ngIf="currentTab==='pending'">
+                    <!-- move delete icon outside table -->
+                    <ng-template #deleteIcon>
+                      <th role="button" (click)="deleteCheckedItems()"><i class="fa fa-trash"></i>
+                      </th>
+                    </ng-template>
+                    <div class="table-responsive">
+                      <table class="table ps-table--shopping-cart">
+                        <thead>
+                          <tr>
+                            <th *ngIf="my_item_checkout_basket.chosenItems.length < 1;else deleteIcon">
+                              #</th>
+                            <th>Product name</th>
+                            <th>Amount Due</th>
+                            <th>QUANTITY</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="pendingItems.length;else emptyPendingItems">
+                            <tr *ngFor="let item of pendingItems">
+                              <td class="col-1">
+                                <input class="form-check-input" type="checkbox" value="" id="itemCheck"
+                                  (change)="addToCheckedList($event, item)">
+                              </td>
+                              <td>
+                                <div class="ps-product--cart">
+                                  <div class="ps-product__thumbnail"><a href="product-default"><img
+                                        src={{item.details[0].image_file}} alt=""></a>
+                                  </div>
+                                  <div class="ps-product__content">
+                                    <a href="product-default">{{item.details[0].product_name}}
+                                    </a>
+                                    <p>Unit Price:
+                                      <strong>{{item.details[0].currency}}
+                                        {{item.details[0].unit_price}}</strong>
+                                    </p>
+                                    <!-- <p>Sold By:<strong> {{item.entity_name}}</strong>
+                                                                      </p> -->
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="price text-center">{{item.details[0].currency}}
+                                {{item.details[0].amount_due}}
+                              </td>
+                              <td class="text-center">
+                                {{item.details[0].qty}}
+                              </td>
+                              <td>
+                                <button class="ps-btn p-3" (click)="moreDetails(item)">More Details</button>
+                              </td>
+                            </tr>
+                          </ng-container>
+                          <ng-template #emptyPendingItems>
+                            <td colspan="5">
+                              <p class="text-center mt-5">No items added yet</p>
+                            </td>
+                          </ng-template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="ps-tab" id="tab-2" *ngIf="currentTab==='completed'">
+                    <div class="table-responsive">
+                      <table class="table ps-table--shopping-cart">
+                        <thead>
+                          <tr>
+                            <th>Product name</th>
+                            <th>Amount Due</th>
+                            <th>QUANTITY</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="completedItems.length;else emptyCompletedItems">
+                            <tr *ngFor="let item of completedItems">
+                              <td>
+                                <div class="ps-product--cart">
+                                  <div class="ps-product__thumbnail"><a href="product-default"><img
+                                        src={{item.details[0].image_file}} alt=""></a>
+                                  </div>
+                                  <div class="ps-product__content">
+                                    <a href="product-default">{{item.details[0].product_name}}
+                                    </a>
+                                    <p>Unit Price:
+                                      <strong>{{item.details[0].currency}}
+                                        {{item.details[0].unit_price}}</strong>
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="price text-center">{{item.details[0].currency}}
+                                {{item.details[0].amount_due}}
+                              </td>
+                              <td class="text-center">
+                                {{item.details[0].qty}}
+                              </td>
+                              <td>
+                                <button class="btn btn-primary p-3" (click)="moreDetails(item)">More Details</button>
+                              </td>
+                            </tr>
+                          </ng-container>
+                          <ng-template #emptyCompletedItems>
+                            <td colspan="4">
+                              <p class="text-center mt-5">No items Completed</p>
+                            </td>
+                          </ng-template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="ps-section__cart-actions">
+                    <a class="ps-btn" href="shop-default"><i class="icon-arrow-left"></i> Continue
+                      Shopping</a>
+                    <div *ngIf="currentTab=='pending'">
+                      <ng-container *ngIf="my_item_checkout_basket.total_amt > 0">
+                        <a class="ps-btn text-white p-3" role="button" (click)="handleFullPayment()">
+                          Full Payment | {{
+                          my_item_checkout_basket.chosenItems[0].details[0].currency }} {{
+                          my_item_checkout_basket.total_amt.toFixed(2) }}
+                        </a>
+                        <a class="ps-btn text-white ml-1 p-3" role="button" (click)="handleManualInstallment()">
+                          Manual Installment
+                        </a>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+
+  <!-- bottom sheet for item details -->
+  <ng-sidebar position="bottom" [(opened)]="toggleSheet" [showBackdrop]="true" [closeOnClickBackdrop]="true"
+    [closeOnClickOutside]="true" #sidebar>
+    <div *ngIf="currentItem">
+      <div class="row justify-content-between px-3 border-right">
+        <div class="row align-items-center h-100">
+          <img src="{{ currentItem.details[0].image_file }}" class="img-thumbnail ml-3" width="50" height="auto" />
+          <h4 class="ml-3">{{ currentItem.details[0].product_name }}</h4>
+        </div>
+        <i class="icon-cross" style="cursor: pointer;" (click)="sidebar.close()"></i>
+      </div>
+      <hr class="w-100" />
+      <div class="row overflow-auto">
+        <div class="col-12 col-md-6">
+          <h4 class="text-left">Details</h4>
+          <div>
+            <div class="row justify-content-between px-4">
+              <strong>Customer</strong>
+              <p class="text-upper-case">{{currentItem.details[0].customer_name}}</p>
+            </div>
+
+            <div class="row justify-content-between px-4">
+              <strong>Payment Status</strong>
+              <p class="text-danger" *ngIf="currentItem.details[0].payment_status === 'P'">Pending</p>
+              <p *ngIf="currentItem.details[0].payment_status === 'I'">In Progress</p>
+              <p class="text-success" *ngIf="currentItem.details[0].payment_status === 'C'">Completed</p>
+            </div>
+
+            <div class="row justify-content-between px-4">
+              <strong>Total Amount Paid</strong>
+              <p>{{currentItem.details[0].total_paid}}</p>
+            </div>
+
+            <div class="row justify-content-between px-4">
+              <strong>Amount Due</strong>
+              <p>{{currentItem.details[0].amount_due}}</p>
+            </div>
+
+            <div class="row justify-content-between px-4">
+              <strong>Payment Term</strong>
+              <p>{{currentItem.details[0].assigned_dur}}</p>
+            </div>
+
+            <div class="row justify-content-between px-4">
+              <strong>Period Left</strong>
+              <p>{{currentItem.details[0].tot_days_left}}</p>
+            </div>
+
+            <div class="row justify-content-between px-4">
+              <strong>Shop</strong>
+              <p>{{currentItem.entity_name}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 border-left">
+          <h4>Transactions</h4>
+          <div *ngIf="transactions;else emptyTransactions">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody class="h-100 overflow-auto">
+                  <tr *ngFor="let transaction of transactions; let i = index">
+                    <td>{{i + 1 }}</td>
+                    <td>
+                      <p class="text-upper-case">{{transaction.req_date}}</p>
+                    </td>
+                    <td>
+                      <p>{{ transaction.amount }}</p>
+                    </td>
+                    <td>
+                      <p
+                        [ngClass]="{'text-success': transaction.status.toLowerCase() === 'passed', 'text-danger': transaction.status.toLowerCase() === 'pending'}">
+                        {{ transaction.status }}</p>
+                    </td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <ng-template #emptyTransactions>
+            <p class="text-center mt-5 pt-5">No Transactions made</p>
+          </ng-template>
+        </div>
+      </div>
+
+    </div>
+  </ng-sidebar>
+
+  <!-- bottom sheet for intallment payment -->
+  <ng-sidebar position="bottom" [(opened)]="installPaymentSheet" [showBackdrop]="true" [closeOnClickBackdrop]="true"
+    [closeOnClickOutside]="true" #instPaymentSheet>
+    <div class="row justify-content-between px-3" style="z-index: 99999; position: relative;">
+      <h3>Installment Payment</h3>
+      <i class="icon-cross" style="cursor: pointer;" (click)="instPaymentSheet.close()"></i>
+    </div>
+    <hr class="w-100" />
+    <div *ngIf="my_item_checkout_basket.chosenItems">
+      <div class="table-responsive pb-3">
+        <table class="table ps-table--shopping-cart">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product name</th>
+              <th>Amount Due</th>
+              <th>Pay</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="my_item_checkout_basket.chosenItems">
+              <tr *ngFor="let item of my_item_checkout_basket.chosenItems, let i = index">
+                <th style="width: 5%;">{{i + 1}}</th>
+                <td>
+                  <div class="ps-product--cart">
+                    <div class="ps-product__thumbnail"><a href="product-default"><img src={{item.details[0].image_file}}
+                          alt=""></a>
+                    </div>
+                    <div class="ps-product__content">
+                      <a href="product-default">{{item.details[0].product_name}}
+                      </a>
+                      <p>Unit Price:
+                        <strong>{{item.details[0].currency}}
+                          {{item.details[0].unit_price}}</strong>
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="price text-center">{{item.details[0].currency}}
+                  {{item.details[0].amount_due}}
+                </td>
+                <td class="text-center" width="10%">
+                  <input type="number" placeholder="0.00" class="form-control" (change)="payInInstallment($event, item)"
+                    min="{{item.details[0].amount_due}}">
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="row justify-content-end fixed-bottom bg-white" id="bottomsheet-footer">
+        <button class="btn btn-lg btn-primary" (click)="continuePaymentForInstallment()">Continue
+          (GHS {{manualInstallmentItems.total_amt}})</button>
+      </div>
+    </div>
+  </ng-sidebar>
+  <!-- installPaymentSheet end -->
+
+</ng-sidebar-container>

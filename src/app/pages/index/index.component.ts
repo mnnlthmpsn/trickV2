@@ -41,15 +41,7 @@ export class IndexComponent implements OnInit {
   constructor(private tricklesAPI: TricklesService) { }
 
   ngOnInit(): void {
-    this.getCategories()
     this.getBanners()
-  }
-
-  getCategories() {
-    this.tricklesAPI.GetProductCategoryAndCategoryTypesList()
-      .subscribe(data => {
-        this.category_list_data = data;
-      })
   }
 
   getBanners() {

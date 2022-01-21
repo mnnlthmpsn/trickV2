@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="ps-page--my-account">
   <div class="ps-breadcrumb">
     <div class="container">
@@ -92,7 +93,7 @@
                   <div class="row">
                     <div class="col-12 col-md-6 form-group">
                       <label for="phone">Phone</label>
-                      <input class="form-control" type="string" placeholder="0551231234" formControlName="phone" required maxlength="10" minlength="10" autocomplete="off">
+                      <input class="form-control" type="string" placeholder="eg: 0551231234" formControlName="phone" required maxlength="10" minlength="10" autocomplete="off">
                       <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert">
                         <p class="text-danger" *ngIf="phone?.errors?.['required']">* Phone is required</p>
                     </div>
@@ -142,10 +143,12 @@
   </div>
   <div class="modal-body">
       <div class="row justify-content-center">
-        <input type="text" placeholder="hey">
-          <!-- <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6}"></ng-otp-input> -->
+        <input type="text" class="form-control w-75" (change)="onOtpChange($event)" placeholder="123456">
+        <button (click)="submitOTP()" class="bg-primary">Continue</button>
       </div>
       <p class="text-center py-2" *ngIf="currentTime > 0">{{ currentTime * 1000 | date:'mm:ss' }}</p>
       <p class="text-center py-2" *ngIf="currentTime < 1">OTP code expired. <u role="button" style="cursor: pointer;" (click)="resendOTP()">Resend OTP</u></p>
   </div>
 </ng-template>
+
+<app-footer></app-footer>

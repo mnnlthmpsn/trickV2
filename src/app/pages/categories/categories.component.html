@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+<div class="ps-page--shop pt-5" id="shop-categories">
+  <div class="container">
+      <div class="ps-product-list ps-product-list--2 ps-more-categories">
+          <div class="ps-section__header">
+              <h3>Browse Subcategories</h3>
+          </div>
+          <div class="ps-section__content">
+            <div class="col-6 col-lg-3" *ngFor="let sub_category of sub_categories">
+              <app-subcategory-card [sub_category]="sub_category"></app-subcategory-card>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

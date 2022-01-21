@@ -18,8 +18,8 @@ export class AuthService {
     // in this case, just check the presence of the token
     const cookieName = this.crypto.set('authKey')
     const encryptedData = this.cookies.get(cookieName)
-    const decryptedData = await this.crypto.get(encryptedData)
-    return JSON.parse(decryptedData)
+    const decryptedData = this.crypto.get(encryptedData)
+    return decryptedData && JSON.parse(decryptedData)
   }
 
 

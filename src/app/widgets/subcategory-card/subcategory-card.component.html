@@ -1,0 +1,18 @@
+<!-- subcategory -->
+<div class="ps-product p-2 mb-5">
+  <div class="ps-product__thumbnail">
+    <a class="cursor" (click)="navigateToSubCategoryDetails()">
+      <img class="sub_img" src="{{ sub_category.image_file }}" alt="">
+    </a>
+  </div>
+
+  <!-- subcategory details -->
+  <div class="ps-product__container">
+    <div class="ps-product__content">
+      <a class="ps-product__title text-center text-dark cursor" (click)="navigateToSubCategoryDetails()">{{ sub_category.product_type_desc }}</a>
+    </div>
+    <div class="ps-product__content hover">
+      <a class="ps-product__title text-center text-dark cursor" (click)="navigateToSubCategoryDetails()">{{ sub_category.product_type_desc }}</a>
+    </div>
+  </div>
+</div>

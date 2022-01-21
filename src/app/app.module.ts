@@ -17,6 +17,17 @@ import { MyAccountComponent } from './pages/my-account/my-account.component';
 import { FooterComponent } from './widgets/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TopCategoriesComponent } from './components/home/top-categories/top-categories.component';
+import { CategoryCardComponent } from './widgets/category-card/category-card.component';
+import { NewArrivalsComponent } from './components/home/new-arrivals/new-arrivals.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { SubcategoryCardComponent } from './widgets/subcategory-card/subcategory-card.component';
+import { CategoryProductsComponent } from './pages/category-products/category-products.component';
+import { CategoryMenuComponent } from './widgets/category-menu/category-menu.component';
+import { FilterComponent } from './widgets/filter/filter.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
+import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { ShoppingMyItemsComponent } from './pages/shopping-my-items/shopping-my-items.component';
+import { SidebarModule } from 'ng-sidebar';
 
 @NgModule({
   declarations: [
@@ -28,7 +39,17 @@ import { TopCategoriesComponent } from './components/home/top-categories/top-cat
     MostViewedComponent,
     MyAccountComponent,
     FooterComponent,
-    TopCategoriesComponent
+    TopCategoriesComponent,
+    CategoryCardComponent,
+    NewArrivalsComponent,
+    CategoriesComponent,
+    SubcategoryCardComponent,
+    CategoryProductsComponent,
+    CategoryMenuComponent,
+    FilterComponent,
+    FavoritesComponent,
+    ShoppingCartComponent,
+    ShoppingMyItemsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +59,8 @@ import { TopCategoriesComponent } from './components/home/top-categories/top-cat
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    SidebarModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

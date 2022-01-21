@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Category, SubCategory } from 'src/app/models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { TricklesService } from 'src/app/services/trickles.service';
 
@@ -44,7 +45,6 @@ export class HeaderComponent implements OnInit {
     this.tricklesAPI.getBasketItemsRequest(this.customer_id)
       .subscribe(
         data => {
-          console.log(data)
           this.basket_array_list = data;
           this.basket_items_count = this.basket_array_list.length || 0;
         },
@@ -69,4 +69,13 @@ export class HeaderComponent implements OnInit {
       )
   }
 
+  navigateToCategoryDetails(category: Category): void {
+    const url = `/categories?category=${btoa(category.product_cat_id.toString())}`
+    window.location.replace(url)
+  }
+
+  navigateToSubCategoryDetails(subCategory: any): void {
+    const url = `/sub_category/products?sub_category=${btoa(subCategory.product_type_code.toString())}`
+    window.location.replace(url)
+  }
 }

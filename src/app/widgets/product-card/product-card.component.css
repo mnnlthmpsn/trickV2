@@ -5,6 +5,7 @@
   object-position: center;
 }
 
-.cursor {
-  cursor: pointer;
+
+.dis_badge {
+  margin-right: 30% !important;
 }

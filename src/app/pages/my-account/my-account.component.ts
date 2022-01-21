@@ -20,6 +20,7 @@ export class MyAccountComponent implements OnInit {
   isLoading: boolean = false
   currentTime: number = 60
   modalReference: any
+  otpCode: string = ''
 
   constructor(
     private fb: FormBuilder,
@@ -105,7 +106,7 @@ export class MyAccountComponent implements OnInit {
     this.tricklesAPI.VerifyPhone(payload)
       .subscribe(data => {
         // if valid, send otp
-        data.resp_code === '109' ? this.sendOTP(payload) : Swal.fire({ icon: 'warning', title: 'Warning', text: 'User already exists. Please Login' })
+        data.resp_code === '109' ? this.sendOTP(payload) : Swal.fire({ icon: 'warning', title: 'Warning', text: 'User already exists. Please Login', confirmButtonColor: '#2F80ED' })
       })
   }
 
@@ -113,7 +114,7 @@ export class MyAccountComponent implements OnInit {
   sendOTP(params: any) {
     this.tricklesAPI.SendOTPRequest(params)
       .subscribe(data => {
-        data.resp_code === '112' ? this.triggerAlert() : Swal.fire({ icon: 'error', title: 'Error', text: data.resp_desc })
+        data.resp_code === '112' ? this.triggerAlert() : Swal.fire({ icon: 'error', title: 'Error', text: data.resp_desc, confirmButtonColor: '#2F80ED' })
       })
   }
 
@@ -137,7 +138,7 @@ export class MyAccountComponent implements OnInit {
     // this.finalizeRegistration
     this.tricklesAPI.VerifyAuthCode(params)
       .subscribe(res => {
-        res.resp_code === '111' ? this.finalizeRegistration() : Swal.fire('error', 'Invalid OTP Pin', 'error')
+        res.resp_code === '111' ? this.finalizeRegistration() : Swal.fire({icon: 'error', text: 'Error OTP Pin', confirmButtonColor: '#2F80ED'})
       }, err => console.log(err))
   }
 
@@ -151,18 +152,19 @@ export class MyAccountComponent implements OnInit {
   }
 
   // trigger finalizeRegistration when length of values entered is 6
-  onOtpChange(e: string) {
-    let otpNumber = ''
-    const params = {
-      phone_number: this.registerForm.value.phone.toString(),
-      auth_code: e,
-      ctry_code: 'GH'
-    }
-    otpNumber = e;
-    otpNumber.length === 6 && this.verifyOTP(params)
+  onOtpChange(e: any) {
+    this.otpCode = e.target.value
   }
 
+  submitOTP(): void {
+    const params = {
+      phone_number: this.registerForm.value.phone.toString(),
+      auth_code: this.otpCode,
+      ctry_code: 'GH'
+    }
 
+    this.verifyOTP(params)
+  }
 
   // finalize the process
   finalizeRegistration() {
@@ -193,7 +195,7 @@ export class MyAccountComponent implements OnInit {
         const payload_stringified = JSON.stringify(login_payload)
         this.login(payload_stringified)
       } else {
-        Swal.fire({ icon: 'warning', title: 'Error', text: data.resp_desc })
+        Swal.fire({ icon: 'warning', title: 'Error', text: data.resp_desc, confirmButtonColor: '#2F80ED' })
       }
 
     })

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Category } from 'src/app/models/category.model';
+import { TricklesService } from 'src/app/services/trickles.service';
 
 @Component({
   selector: 'app-top-categories',
@@ -8,12 +10,14 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class TopCategoriesComponent implements OnInit {
 
+  top_categories_array_list: Category[] = []
+
   carouselOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
     touchDrag: false,
     pullDrag: false,
-    dots: true,
+    dots: false,
     navText: ['', ''],
     navSpeed: 700,
     autoplay: true,
@@ -32,12 +36,21 @@ export class TopCategoriesComponent implements OnInit {
         items: 4
       }
     },
-    nav: false
+    nav: true
   }
 
-  constructor() { }
+  constructor(private tricklesAPI: TricklesService) { }
 
   ngOnInit(): void {
+    this.getTopCategories()
   }
 
+  getTopCategories() {
+    this.tricklesAPI.GetTopCategoriesRequest()
+      .subscribe(data => {
+        data.map((category: any) => {
+          this.top_categories_array_list.push(Category.fromJson(category))
+        })
+      })
+  }
 }

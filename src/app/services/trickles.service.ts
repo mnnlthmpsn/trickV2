@@ -63,10 +63,7 @@ export class TricklesService {
 
   GetBasketItems(customer_id): Observable<BasketOrders[]> {
     const url = `${this.trickles_api_links.DISPLAY_CART_ITEMS_URL}?customer_id=${customer_id}`;
-    return this.httpclient.get(url).pipe(
-      // Adapt each item in the raw data array
-      map((data: any[]) => data.map((item) => this.basketordersAdapter.adapt(item)))
-    );
+    return this.httpclient.get(url)
   }
 
 
