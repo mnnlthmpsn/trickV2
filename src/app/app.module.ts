@@ -28,6 +28,9 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { ShoppingMyItemsComponent } from './pages/shopping-my-items/shopping-my-items.component';
 import { SidebarModule } from 'ng-sidebar';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { UserInformationComponent } from './pages/user-information/user-information.component';
+import { ProfileSidebarComponent } from './components/profile-sidebar/profile-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { SidebarModule } from 'ng-sidebar';
     FilterComponent,
     FavoritesComponent,
     ShoppingCartComponent,
-    ShoppingMyItemsComponent
+    ShoppingMyItemsComponent,
+    CheckoutComponent,
+    UserInformationComponent,
+    ProfileSidebarComponent
   ],
   imports: [
     BrowserModule,

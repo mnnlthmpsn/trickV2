@@ -1,0 +1,46 @@
+<div class="ps-section__left">
+  <aside class="ps-widget--account-dashboard">
+      <div class="ps-widget__header"><img src="assets/img/users/3.jpg" alt="">
+          <figure>
+              <figcaption>Hello {{customer?.other_names }} {{ customer?.surname }}</figcaption>
+          </figure>
+      </div>
+      <div class="ps-widget__content">
+          <ul>
+              <li [class.active]="currentRoute === '/user-information'">
+                  <a routerLink="/user-information"><i class="icon-user"></i> Account Information </a>
+              </li>
+
+              <li [class.active]="currentRoute === '/airtime'">
+                  <a routerLink="/airtime"><i class="icon-credit-card"></i> Buy Airtime </a>
+              </li>
+
+              <li [class.active]="currentRoute === '/wallets'">
+                  <a routerLink="/wallets"><i class="icon-wallet"></i> My Wallet </a>
+              </li>
+
+              <li [class.active]="currentRoute === '/notifications'">
+                  <a routerLink="/notifications"><i class="icon-alarm-ringing"></i> Notifications </a>
+              </li>
+
+              <li>
+                  <a routerLink="/shopping-cart"><i class="icon-cart"></i> Shopping Basket </a>
+              </li>
+
+              <li>
+                  <a routerLink="/shopping-my-items"><i class="icon-cart-add"></i> My Items </a>
+              </li>
+
+              <li [class.active]="currentRoute === '/referral'">
+                  <a routerLink="/referral"><i class="icon-graduation-hat"></i> Loyalty Points </a>
+              </li>
+
+              <li [class.active]="currentRoute === '/transaction-history'">
+                  <a routerLink="/transaction-history"><i class="icon-papers"></i> Transaction History </a>
+              </li>
+              <li (click)="logout()"><a role="button" style="cursor: pointer;"><i class="icon-power-switch"></i>Logout</a></li>
+          </ul>
+
+      </div>
+  </aside>
+</div>
