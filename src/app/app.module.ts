@@ -31,6 +31,14 @@ import { SidebarModule } from 'ng-sidebar';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { UserInformationComponent } from './pages/user-information/user-information.component';
 import { ProfileSidebarComponent } from './components/profile-sidebar/profile-sidebar.component';
+import { WalletComponent } from './pages/wallet/wallet.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProductDefaultComponent } from './pages/product-default/product-default.component';
+import { RelatedProductsComponent } from './components/related-products/related-products.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+import { AirtimeComponent } from './pages/airtime/airtime.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +63,15 @@ import { ProfileSidebarComponent } from './components/profile-sidebar/profile-si
     ShoppingMyItemsComponent,
     CheckoutComponent,
     UserInformationComponent,
-    ProfileSidebarComponent
+    ProfileSidebarComponent,
+    WalletComponent,
+    NotFoundComponent,
+    ProductDefaultComponent,
+    RelatedProductsComponent,
+    PasswordResetComponent,
+    AirtimeComponent,
+    NotificationsComponent,
+    TransactionHistoryComponent,
   ],
   imports: [
     BrowserModule,

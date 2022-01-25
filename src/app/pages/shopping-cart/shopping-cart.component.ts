@@ -71,7 +71,6 @@ export class ShoppingCartComponent implements OnInit {
   getBasketItems(): void {
     this.tricklesAPI.GetBasketItems(this.customer_id)
       .subscribe((data: any[]) => {
-        console.log(data)
         data.map((item: any) => this.basketItems.push(this.basketordersAdapter.adapt(item)))
       });
   }

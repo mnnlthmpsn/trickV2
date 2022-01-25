@@ -1,0 +1,319 @@
+<app-header></app-header>
+
+<main class="ps-page--my-account mb-5">
+  <div class="ps-breadcrumb">
+      <div class="container">
+          <ul class="breadcrumb">
+              <li><a href="index">Home</a></li>
+              <li><a href="user-information">Account</a></li>
+              <li>Wallets</li>
+          </ul>
+      </div>
+  </div>
+  <section class="ps-section--account">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-3 mb-3">
+                  <app-profile-sidebar></app-profile-sidebar>
+              </div>
+              <div class="col-lg-9">
+                  <div class="ps-section__right">
+                      <div class="ps-section--account-setting">
+                          <div class="ps-section__content col-sm-10 offset-sm-1">
+                              <div class="ps-section__header">
+                                  <h3 class="mt-2">My Wallets</h3>
+                              </div>
+                              <!-- start card -->
+                              <div class="row justify-content-between border-bottom px-4 pb-2">
+                                  <div class="font-weight-bold">DEBIT CARDS</div>
+                                  <div *ngIf="card_wallets.length < 2" role="button" class="font-weight-bold"
+                                      data-placement="top" (click)="openAddCardModal()" style="cursor: pointer;">
+                                      <i class="fa fa-plus"></i> ADD
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <ng-container *ngIf="card_wallets?.length;else emptyCardWallet">
+                                      <div class="col-12 col-lg-6" *ngFor="let card of card_wallets">
+                                          <div class="card mt-3">
+                                              <div class="card-header">
+                                                  <div class="d-flex">
+                                                      <div class="mr-auto p-2 font-weight-bold">
+                                                          <ng-container *ngIf="card.is_primary;else secondary">
+                                                              PRIMARY
+                                                          </ng-container>
+                                                          <ng-template #secondary>SECONDARY
+                                                          </ng-template>
+                                                      </div>
+                                                      <div class="p-2">
+                                                          <img src="assets/img/payment/visa.png" alt="" height="20">
+                                                      </div>
+                                                      <div class="p-2"><img src="assets/img/payment/mastercard.png"
+                                                              alt="" height="20">
+                                                      </div>
+                                                  </div>
+                                              </div>
+
+                                              <div class="card-body">
+                                                  <div class="row px-5 mb-3">
+                                                      <p><strong>{{card.pan}}</strong></p>
+                                                  </div>
+
+                                                  <div class="row justify-content-between mb-3 px-5">
+                                                      <p>EMAIL <br><strong>{{card.holder_email}}</strong></p>
+                                                      <p class="text-right"> EXPIRY
+                                                          <br><strong>{{card.exp_month}}/{{card.exp_year}}</strong>
+                                                      </p>
+                                                  </div>
+
+                                                  <div class="row justify-content-between mb-3 px-5">
+                                                      <p>NAME <br><strong>{{card.holder_name}}</strong></p>
+                                                      <div class="mt-3 pt-3">
+                                                          <button class="btn btn-danger btn-sm"
+                                                              (click)="removeWallet(card.med_id)"><i
+                                                                  class="fa fa-trash mr-1"></i>Remove</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </ng-container>
+                              </div>
+                              <ng-template #emptyCardWallet>
+                                  <div>No Cards Added</div>
+                              </ng-template>
+
+                              <!-- end card -->
+
+                              <!-- start MOMO -->
+                              <div class="row justify-content-between border-bottom px-4 pb-2 pt-5">
+                                  <div class="font-weight-bold pt-2">MOBILE MONEY</div>
+                                  <div role="button" class="font-weight-bold" data-placement="top"
+                                      (click)="openAddMomoModal()" style="cursor: pointer;">
+                                      <i class="fa fa-plus"></i> ADD
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <ng-container *ngIf="momo_wallets?.length;else emptyMomoWallet">
+                                      <div class="col-12 col-lg-6" *ngFor="let momo_wallet of momo_wallets">
+                                          <div class="card mt-3 shadow-sm">
+                                              <div class="card-body">
+                                                  <div class="row flex">
+                                                      <div class="col align-self-center">
+                                                          <img *ngIf="momo_wallet.nw == 'MTN'"
+                                                              src="assets/img/payment/mtn_momo.png" alt="MTN"
+                                                              height="auto" width="100">
+                                                          <img *ngIf="momo_wallet.nw == 'VOD'"
+                                                              src="assets/img/payment/vodafone_cash_logo.png"
+                                                              alt="VODAFONE" height="auto" width="100">
+                                                          <img *ngIf="momo_wallet.nw == 'AIR'"
+                                                              src="assets/img/payment/airtel_tigo_cash.jpg" alt="AIRTELTIGO"
+                                                              height="auto" width="100">
+                                                      </div>
+                                                      <div class="col text-right">
+                                                          <p>
+                                                              <ng-container
+                                                                  *ngIf="momo_wallet.is_primary;else secondary">
+                                                                  Primary
+                                                              </ng-container>
+                                                              <ng-template #secondary>Secondary
+                                                              </ng-template>
+                                                          </p>
+                                                          <div class="text-secondary">
+                                                              <p class="card-title mt-2 font-weight-bold"
+                                                                  *ngIf="momo_wallet.nw === 'MTN' ">
+                                                                  MTN Mobile Money
+                                                              </p>
+                                                              <p class="card-title mt-2 font-weight-bold"
+                                                                  *ngIf="momo_wallet.nw === 'VOD' ">
+                                                                  Vodafone Cash
+                                                              </p>
+                                                              <p class="card-title mt-2 font-weight-bold"
+                                                                  *ngIf="momo_wallet.nw === 'AIR' ">
+                                                                  Airtel Tigo Money
+                                                              </p>
+                                                          </div>
+                                                          <p class="card-title text-dark">
+                                                              {{momo_wallet.pan}}
+                                                          </p>
+                                                          <button (click)="setAsPrimary(momo_wallet.med_id)" *ngIf="!momo_wallet.is_primary" class="btn btn-success btn-sm mr-1">
+                                                              Set As Primary
+                                                          </button>
+                                                          <button class="btn btn-danger btn-sm"
+                                                              (click)="removeWallet(momo_wallet.med_id)"><i
+                                                                  class="fa fa-trash"></i>
+                                                              Remove</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </ng-container>
+                              </div>
+                              <ng-template #emptyMomoWallet>
+                                  <tbody>
+                                      <td>No Mobile Money Wallet Added</td>
+                                  </tbody>
+                              </ng-template>
+                              <!-- end momo -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- add card modal -->
+      <ng-template #addCard let-modal>
+          <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Card Details</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <!-- card setup modal -->
+              <form class="ps-form--checkout" [formGroup]="cardWalletForm" (ngSubmit)="onCardSetupSubmit()">
+                  <div class="row justify-content-center">
+                      <div class="col-12 col-md-10 py-md-3">
+                          <div class="form-row">
+                              <div class="col-md-12">
+                                  <label for="email" style="color: #02526E;">* Email</label>
+                                  <input type="email" class="form-control" formControlName="email" placeholder="Email"
+                                      required="required" style="color: #02526E;">
+                              </div>
+                          </div><br>
+
+                          <div class="form-row">
+                              <div class="col-md-12">
+                                  <label for="name" style="color: #02526E;">* Name On Card</label>
+                                  <input type="text" class="form-control" formControlName="cardholder_name"
+                                      placeholder="Name On Card" required="required" style="color: #02526E;">
+                              </div>
+                          </div><br>
+
+                          <div class="form-row">
+                              <div class="col-md-12">
+                                  <label for="card_number" style="color: #02526E;">* Card
+                                      Number</label>
+                                  <input type="number" class="form-control" formControlName="card_number"
+                                      placeholder="Card Number" required="required" style="color: #02526E;">
+                              </div>
+                          </div><br>
+
+                          <div class="input-group">
+                              <input type="number" class="form-control" formControlName="card_expiry_month"
+                                  placeholder="Expiry Month" minlength="2" maxlength="2" />
+                              <span class="input-group-addon"> </span>
+                              <input type="number" class="form-control" formControlName="card_expiry_year"
+                                  placeholder="Expiry Year" minlength="2" maxlength="2" />
+                          </div>
+                          <button class="btn btn-primary btn-lg btn-block mt-3" type="submit">Add Debit Card</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </ng-template>
+      <!-- card setup end -->
+
+      <!-- momo card modal -->
+      <ng-template #addMomo let-modal>
+          <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Momo Details</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="momoWalletForm" (ngSubmit)="onMomoSetupSubmit()">
+                  <div class="row mb-3 justify-content-center">
+                      <img src="assets/img/payment-method/1.jpg" alt="MTN Momo" height="auto" width="100">
+                      <img src="assets/img/payment-method/2.jpg" alt="AirtelTigo Cash" height="auto" width="100">
+                      <img src="assets/img/payment-method/3.jpg" alt="Vodafone Cash" height="auto" width="100">
+                  </div>
+                  <div class="row justify-content-center">
+                      <div class="col-12 col-md-10">
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" formControlName="nw" value="MTN"
+                                  id="mtnMomo">
+                              <label class="form-check-label px-3 pt-1" for="MTN">
+                                  <p>MTN Mobile Money</p>
+                              </label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" formControlName="nw" value="AIR"
+                                  id="airtelCash">
+                              <label class="form-check-label px-3 pt-1" for="AIR">
+                                  <p>AirtelTigo Cash</p>
+                              </label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" formControlName="nw" value="VOD"
+                                  id="vodafoneCash">
+                              <label class="form-check-label px-3 pt-1" for="VOD">
+                                  <p>Vodafone Cash</p>
+                              </label>
+                          </div>
+
+                          <div class="form-group">
+                              <!-- <label for="mobile_number" style="color: #02526E;">* Mobile Number</label> -->
+                              <input type="number" class="form-control" formControlName="mobile_number"
+                                  placeholder="Mobile Number" required="required" style="color: #02526E;">
+                          </div>
+                          <button class="btn btn-primary btn-lg btn-block" type="submit">Add Number</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </ng-template>
+      <!-- momo setup end -->
+
+      <!-- confirm password -->
+      <ng-template #verifyPIN let-modal>
+          <div class="modal-header">
+              <h4 class="modal-title text-center" id="modal-basic-title">Confirm User PIN</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="row justify-content-center">
+                  <div class="col-12 col-md-10">
+                      <form (submit)="verifyPINonSubmit()" [formGroup]="pinForm" novalidate>
+                          <div class="form-group">
+                              <input formControlName="_pin" type="password" maxlength="5" minlength="5" class="form-control" autocomplete="off"
+                                  [class.is-invalid]="_pin?.invalid && _pin?.touched" name="pin" required>
+                              <small [class.d-none]="_pin?.valid || _pin?.untouched" class="text-danger">*Field is
+                                  Required</small>
+                          </div>
+                          <button [disabled]="pinForm.invalid" class="btn btn-primary">Confirm</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+      <!-- confirm password end -->
+
+      <!-- confirm OTP -->
+      <ng-template #verifyOTP let-modal>
+          <div class="modal-header">
+              <h4 class="modal-title text-center" id="modal-basic-title">Enter OTP</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div class="row justify-content-center">
+              <input type="text" class="form-control w-75" (change)="onOtpChange($event)" placeholder="123456">
+              <button (click)="verifyOTPonSubmit()" class="ps-btn mt-2">Continue</button>
+            </div>
+            <p class="text-center py-2" *ngIf="currentTime > 0">{{ currentTime * 1000 | date:'mm:ss' }}</p>
+            <p class="text-center py-2" *ngIf="currentTime < 1">OTP code expired. <u role="button" style="cursor: pointer;" (click)="resendOTP()">Resend OTP</u></p>
+        </div>
+      </ng-template>
+      <!-- confirm OTP end -->
+
+  </section>
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,105 @@
+<app-header></app-header>
+<main class="ps-page--my-account">
+  <div class="ps-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="index">Home</a></li>
+        <li><a href="user-information">Account</a></li>
+        <li>Invoices</li>
+      </ul>
+    </div>
+  </div>
+  <section class="ps-section--account">
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col-12 col-md-4">
+          <app-profile-sidebar></app-profile-sidebar>
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="ps-section__right">
+            <div class="ps-section--account-setting">
+              <div class="ps-section__header">
+                <h3 class="mt-sm-5">Transaction History</h3>
+              </div>
+              <div class="ps-section__content">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Action</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngIf="transactions_history?.length;else emptyTransactionHistory">
+                        <tr *ngFor="let history of transactions_history, let i = index">
+                          <th scope="row">{{ i + 1 }}</th>
+                          <td><span><img src="{{ history.image_file }}" alt="" width="80" height="auto"></span>
+                            {{history?.product_sub_div}}</td>
+                          <td>{{history?.payment_plan }}</td>
+                          <td><button class="btn btn-primary btn-s"
+                              (click)="openTransDetailsModal(history)">Details</button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                      <ng-template #emptyTransactionHistory>
+                        <tr>
+                          <td colspan="4">
+                            <p class="m-5 text-center">No Transactions performed</p>
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </tbody>
+                  </table>
+                  <!-- trans details modal -->
+                  <ng-template #transDetails let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Transaction
+                        Details - {{ currentHistory.product_sub_div }}</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Trans Type</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Status</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container>
+                            <tr *ngFor="let trans of currentHistory.details, let i = index">
+                              <th scope="row">{{ i + 1 }}</th>
+                              <td>{{ trans.req_date }}</td>
+                              <td>{{ trans.trans_type_desc }}</td>
+                              <td>{{ trans.amount }}</td>
+                              <td
+                                [ngClass]="{'text-success': trans.status === 'Passed', 'text-danger' : trans.status === 'Pending' }"
+                                class="text-danger">{{ trans.status }}</td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-template>
+                  <!-- transmodal end -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

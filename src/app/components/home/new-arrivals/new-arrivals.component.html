@@ -3,16 +3,12 @@
     <div class="ps-section__header">
       <h3>New Arrivals<span></span></h3>
     </div>
-    <div class="bg-white p-5">
-      <owl-carousel-o [options]="carouselOptions" id="banner">
-        <ng-container *ngFor="let product of new_arrivals_items_array_list">
-          <ng-template carouselSlide [id]="product.product_info_id!.toString()">
-            <div class="w-25">
-              <app-product-card [product]="product"></app-product-card>
-            </div>
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
+    <div class="ps-shopping-product bg-white p-5">
+      <div class="row">
+        <div class="col-6 col-lg-3" *ngFor="let product of new_arrivals_items_array_list">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

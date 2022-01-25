@@ -1,11 +1,11 @@
 <div class="ps-product mb-5">
-  <div class="ps-product__thumbnail"><a href="product-default.html">
+  <div class="ps-product__thumbnail"><a routerLink="/product-details" [queryParams]="{ product: product.product_info_id }">
       <img class="product_img" src="{{ product.image_file }}" alt=""></a>
     <div class="ps-product__badge dis_badge m-2" *ngIf="product.showDiscount()">{{ product.getDiscountValue() }}%</div>
     <div class="ps-product__badge bg-primary new_badge m-2" *ngIf="product.newly_published">New</div>
 
     <!-- product actions -->
-    <ul class="ps-product__actions">
+    <ul class="ps-product__actions pl-4">
       <!-- add to cart -->
       <li (click)="addToCart()">
         <a class="cursor" data-toggle="tooltip" data-placement="top" title="Add to Cart">
@@ -15,7 +15,7 @@
 
       <!-- view item -->
       <li>
-        <a class="cursor" data-placement="top" title="View" data-toggle="tooltip"><i
+        <a routerLink="/product-details" [queryParams]="{ product: product.product_info_id }" class="cursor" data-placement="top" title="View" data-toggle="tooltip"><i
             class="icon-eye"></i></a></li>
 
       <!-- add to wishlist -->
@@ -28,7 +28,7 @@
   <!-- product details -->
   <div class="ps-product__container"><a class="ps-product__vendor" href="#">{{ product.entity_name }}</a>
     <div class="ps-product__content">
-      <a class="ps-product__title" href="product-default.html">
+      <a class="ps-product__title" routerLink="/product-details" [queryParams]="{ product: product.product_info_id }">
         {{ product.product_name }}
       </a>
       <ng-container *ngIf="product.showDiscount();else originalValue">
@@ -40,7 +40,7 @@
       </ng-template>
     </div>
     <div class="ps-product__content hover">
-      <a class="ps-product__title" href="product-default.html">
+      <a class="ps-product__title" routerLink="/product-details" [queryParams]="{ product: product.product_info_id }">
         {{ product.product_name }}
       </a>
       <ng-container *ngIf="product.showDiscount();else originalValue">

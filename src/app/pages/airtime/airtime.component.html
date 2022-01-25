@@ -1,0 +1,300 @@
+<app-header></app-header>
+
+<main class="ps-page--my-account">
+    <div class="ps-breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="index">Home</a></li>
+                <li>User Information</li>
+            </ul>
+        </div>
+    </div>
+    <section class="ps-section--account">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <app-profile-sidebar></app-profile-sidebar>
+                </div>
+                <div class="col-lg-8">
+                    <div class="ps-section__right">
+                        <form class="ps-form--account-setting col-12" [formGroup]="airtimeForm"
+                            (ngSubmit)="buyAirtime()">
+                            <div class="ps-form__header">
+                                <h3 class="py-3 border-bottom w-25">Airtime</h3>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="py-3">Buy/Send Airtime</h4>
+                                    <button class="ps-btn" type="button" (click)="openModal()">History</button>
+                                </div>
+                                <p>Select Payment Mode</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment"
+                                                id="exampleRadios1" value="MOM"
+                                                (change)="paymentMethodChange($event)" />
+                                            <label class="form-check-label mt-1 ml-5" for="mobile-money">
+                                                Mobile Money
+                                            </label>
+                                        </div>
+                                        <div class="my-3 ml-5 pl-5">
+                                            <div class="row">
+                                                <img src="assets/img/payment/mtn_momo.png" alt="mtn-momo" height="30"
+                                                    width="auto" />
+                                                <img src="assets/img/payment/vodafone_cash_logo.png" alt="#" height="30"
+                                                    width="auto" />
+                                                <img src="assets/img/payment/airtel_tigo_cash.jpg" alt="#" height="30"
+                                                    width="auto" />
+                                            </div>
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="radio" name="payment" id="card"
+                                                value="CRD" (change)="paymentMethodChange($event)" />
+                                            <label class="form-check-label mt-1 ml-5" for="card">
+                                                Card
+                                            </label>
+                                        </div>
+                                        <div class="my-3 ml-5 pl-5">
+                                            <div class="row">
+                                                <img src="assets/img/payment/visa.png" alt="#" height="30"
+                                                    width="auto" />
+                                                <img src="assets/img/payment/mastercard.png" alt="#" height="30"
+                                                    width="auto" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col" *ngIf="selectedWallet">
+                                        <div class="card border-0 shadow p-3">
+                                            <div class="row card-body">
+                                                <div class="col">
+                                                    <p *ngIf="selectedWallet?.nw === 'MTN'"
+                                                        class="font-weight-bold text-secondary">
+                                                        MTN Mobile Money
+                                                    </p>
+                                                    <p *ngIf="selectedWallet?.nw === 'VOD'"
+                                                        class="font-weight-bold text-secondary">
+                                                        Vodafone Cash
+                                                    </p>
+                                                    <p *ngIf="selectedWallet?.nw === 'AIR'"
+                                                        class="font-weight-bold text-secondary">
+                                                        AirtelTigo Cash
+                                                    </p>
+                                                    <p class="font-weight-bold text-secondary">
+                                                        <small>{{ selectedWallet?.holder_name }}</small>
+                                                    </p>
+                                                    <p>{{ selectedWallet.pan }}</p>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <div *ngIf="selectedWallet?.nw === 'MTN'">
+                                                        <img src="assets/img/telco_logos/momo.jpg" alt="Momo" width="40"
+                                                            height="auto" />
+                                                    </div>
+                                                    <div *ngIf="selectedWallet?.nw === 'VOD'">
+                                                        <img src="assets/img/telco_logos/voda_cash.png" alt="VodaCash"
+                                                            width="40" height="auto" />
+                                                    </div>
+                                                    <div *ngIf="selectedWallet?.nw === 'AIR'">
+                                                        <img src="assets/img/telco_logos/air.png" alt="AirtelCash"
+                                                            width="30" height="auto" />
+                                                    </div>
+                                                    <div *ngIf="selectedWallet?.payment_mode === 'CRD'"
+                                                        class="row justify-content-end">
+                                                        <img src="assets/img/telco_logos/visa.png" alt="VISA" width="30"
+                                                            height="auto" />
+                                                        <img class="mr-4 ml-2"
+                                                            src="assets/img/telco_logos/mastercard.png" alt="VISA"
+                                                            width="30" height="auto" />
+                                                    </div>
+                                                    <a [routerLink]="'/wallets'"><small>change wallet
+                                                            <i class="fa fa-angle-right ml-2"></i></small></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="pt-3">Select your Network</p>
+                                <div class="d-flex justify-content-between px-lg-4 pb-5">
+                                    <!-- MTN -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" formControlName="network"
+                                            id="mtn-momo" value="MTN" />
+                                        <label class="form-check-label mt-1 ml-2" for="mtn-momo">
+                                            <img src="assets/img/telco_logos/mtn-log.png" alt="mtn" height="30"
+                                                width="auto" />
+                                        </label>
+                                    </div>
+
+                                    <!-- VODAFONE -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" formControlName="network"
+                                            id="voda-momo" value="VOD" />
+                                        <label class="form-check-label mt-1 ml-2" for="voda-momo">
+                                            <img src="assets/img/telco_logos/vod-log.png" alt="vodafone" height="30"
+                                                width="auto" />
+                                        </label>
+                                    </div>
+
+                                    <!-- AIRTELTIGO -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" formControlName="network"
+                                            id="airtel-momo" value="AIR" />
+                                        <label class="form-check-label mt-1" for="airtel-momo">
+                                            <img src="assets/img/payment/airtel_tigo_cash.jpg" alt="airtel-tigo"
+                                                height="30" width="auto" />
+                                        </label>
+                                    </div>
+
+                                    <!-- GLO -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" formControlName="network"
+                                            id="glo-momo" value="GLO" />
+                                        <label class="form-check-label" for="glo-momo">
+                                            <img src="assets/img/telco_logos/glo-log.png" alt="glo" height="30"
+                                                width="auto" />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ps-form__content">
+                                <div class="row align-items-center">
+                                    <div class="form-group col-lg-5">
+                                        <label>Phone Number</label>
+                                        <input class="form-control" type="tel" formControlName="phone_number" placeholder="Enter Phone Number" />
+                                        <ng-container *ngIf="phone_number?.invalid && phone_number?.touched"
+                                            class="flex flex-col">
+                                            <div>
+                                                <small *ngIf="phone_number?.errors?.['required']" class="text-danger">*
+                                                    Phone Number is required</small>
+                                            </div>
+                                            <div>
+                                                <small *ngIf="phone_number?.errors?.['pattern']" class="text-danger">* Enter
+                                                    valid Phone Number</small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-group col-lg-5">
+                                        <label>Amount (GHc)</label>
+                                        <input class="form-control" type="number" formControlName="amount" min="0.2" step=".1" placeholder="Enter Amount"/>
+                                        <ng-container *ngIf="amount?.invalid && amount?.touched" class="flex flex-col">
+                                            <div>
+                                                <small *ngIf="amount?.errors?.['required']" class="text-danger">* Amount is
+                                                    required</small>
+                                            </div>
+                                            <div>
+                                                <small *ngIf="amount?.errors?.['pattern']" class="text-danger">* Enter valid
+                                                    Amount</small>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-12 col-lg-2">
+                                        <button (click)="addToNumberList()" type="button" class="ps-btn ps-btn--full-width">
+                                            <i class="icon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- show numbers buying for here -->
+                            <ng-container *ngIf="numberList.length">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <p class="font-weight-bold">#</p>
+                                            </th>
+                                            <th scope="col">
+                                                <p class="font-weight-bold">Number</p>
+                                            </th>
+                                            <th scope="col">
+                                                <p class="font-weight-bold">Network</p>
+                                            </th>
+                                            <th scope="col">
+                                                <p class="font-weight-bold">Amount</p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of numberList; index as i">
+                                            <th scope="row">{{ i + 1 }}</th>
+                                            <td>{{ item.phone_number }}</td>
+                                            <td>{{ item.network }}</td>
+                                            <td>GHc {{ item.amount }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
+
+                            <!-- show numbers buying for here end -->
+                            <div class="form-group submit" *ngIf="numberList.length">
+                                <button class="ps-btn" type="submit">Buy Airtime</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #historyTemplate let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="modal-basic-title">Airtime History</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <p class="font-weight-bold">#</p>
+                            </th>
+                            <th scope="col">
+                                <p class="font-weight-bold">Number</p>
+                            </th>
+                            <th scope="col">
+                                <p class="font-weight-bold">Amount <span class="small">GHc</span></p>
+                            </th>
+                            <th scope="col">
+                                <p class="font-weight-bold">Status</p>
+                            </th>
+                            <th scope="col">
+                                <p class="font-weight-bold">Date</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let hist of history; index as i">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>{{ hist.customer_number }}</td>
+                            <td>{{ hist.amount }}</td>
+                            <td>{{ hist.payment_status }}</td>
+                            <td>{{ hist.req_date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-template>
+
+    </section>
+    <div class="ps-newsletter">
+        <div class="ps-container">
+            <form class="ps-form--newsletter" action="do_action" method="post">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="ps-form__left">
+                            <h3>Newsletter</h3>
+                            <p>Subcribe to get information about products and coupons</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="ps-form__right">
+                            <div class="form-group--nest">
+                                <input class="form-control" type="email" placeholder="Email address" />
+                                <button class="ps-btn">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<app-footer></app-footer>
