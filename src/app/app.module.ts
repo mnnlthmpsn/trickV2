@@ -39,6 +39,8 @@ import { PasswordResetComponent } from './pages/password-reset/password-reset.co
 import { AirtimeComponent } from './pages/airtime/airtime.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { TransactionHistoryComponent } from './pages/transaction-history/transac
     AirtimeComponent,
     NotificationsComponent,
     TransactionHistoryComponent,
+    FaqComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,9 +17,9 @@
 
       <!-- search -->
       <div class="header__center">
-        <form class="ps-form--quick-search" action="index.html" method="get">
-          <input class="form-control" type="text" placeholder="I'm shopping for...">
-          <button>Search</button>
+        <form class="ps-form--quick-search" [formGroup]="searchForm" (ngSubmit)="searchItem()">
+          <input class="form-control" formControlName='search_name' type="text" placeholder="I'm shopping for...">
+          <button type="submit">Search</button>
         </form>
       </div>
 
@@ -155,13 +155,13 @@
     </div>
   </div>
   <div class="ps-search--mobile">
-    <form class="ps-form--search-mobile" action="index.html" method="get">
-      <div class="form-group--nest">
-        <input class="form-control" type="text" placeholder="Search something...">
-        <button><i class="icon-magnifier"></i></button>
-      </div>
+    <form class="ps-form--search-mobile" [formGroup]="searchForm" (ngSubmit)="searchItem()">
+        <div class="form-group--nest">
+            <input class="form-control" type="text" placeholder="Search something..." formControlName="search_name">
+            <button type="submit"><i class="icon-magnifier"></i></button>
+        </div>
     </form>
-  </div>
+</div>
 </header>
 
 <!-- categories mobile -->
@@ -199,9 +199,9 @@
 <!-- mobile search -->
 <div class="ps-panel--sidebar" id="search-sidebar">
   <div class="ps-panel__header">
-    <form class="ps-form--search-mobile" action="index.html" method="get">
+    <form class="ps-form--search-mobile" [formGroup]='searchForm' (ngSubmit)="searchItem()">
       <div class="form-group--nest">
-        <input class="form-control" type="text" placeholder="Search something...">
+        <input class="form-control" formControlName="search_name" type="text" placeholder="Search something...">
         <button><i class="icon-magnifier"></i></button>
       </div>
     </form>

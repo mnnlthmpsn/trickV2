@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="ps-page--single">
+  <div class="ps-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="index">Home</a></li>
+        <li>Frequently Asked Questions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row w-full justify-content-center">
+    <div class="col">
+      <div class="ps-faqs">
+        <div class="container">
+          <div class="ps-section__header">
+            <h1>Frequently Asked Questions</h1>
+          </div>
+          <div class="ps-section__content">
+            <div class="table-responsive">
+              <table class="table ps-table--faqs">
+                <tbody *ngFor="let item of faq_list">
+                  <tr>
+                    <!-- <td class="heading" rowspan="3">
+                                      <h4>SHIPPING</h4>
+                                  </td> -->
+                    <td class="question"> {{item.subject}}</td>
+                    <td>
+                      <div [innerHTML]="item.description"></div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ps-call-to-action">
+    <div class="container">
+      <h3>We’re Here to Help !<a routerLink="/contact-us"> Contact us</a></h3>
+    </div>
+  </div>
+
+</div>
+<app-footer></app-footer>

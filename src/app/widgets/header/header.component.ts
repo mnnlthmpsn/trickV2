@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Category, SubCategory } from 'src/app/models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { TricklesService } from 'src/app/services/trickles.service';
@@ -16,12 +18,22 @@ export class HeaderComponent implements OnInit {
   basket_items_count: number = 0
   fav_items_count: number = 0
   confirmed_items_count: number = 0
+  searchForm: FormGroup
 
-  constructor(private tricklesAPI: TricklesService, private auth: AuthService) { }
+  constructor(private tricklesAPI: TricklesService, private fb:FormBuilder, private router: Router, private auth: AuthService) {
+    this.searchForm = this.fb.group({
+      search_name: ['', Validators.required]
+    })
+   }
 
   ngOnInit(): void {
     this.getUserID()
     this.getCategories()
+  }
+
+  // getter fxn
+  get search_name() {
+    return this.searchForm.get('search_name')
   }
 
   // get categories
@@ -67,6 +79,19 @@ export class HeaderComponent implements OnInit {
           this.confirmed_items_count = data.length || 0;
         },
       )
+  }
+
+  searchItem(): void {
+    if (this.searchForm.valid) {
+      let storageItems = JSON.parse(localStorage.getItem('searchedItems') || '[]')
+
+      // check if item already exists in array
+      storageItems.push(this.search_name?.value)
+      localStorage.setItem('searchedItems', JSON.stringify(storageItems))
+
+      this.router.navigate(['/query'], {queryParams: { search_name: this.search_name?.value }})
+
+    }
   }
 
   navigateToCategoryDetails(category: Category): void {
