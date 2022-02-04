@@ -44,10 +44,7 @@
               "src/assets/addons/slick-animation.min.js",
               "src/assets/addons/lightGallery-master/dist/js/lightgallery-all.min.js",
               "src/assets/addons/sticky-sidebar/dist/sticky-sidebar.min.js",
-              "src/assets/addons/select2/dist/js/select2.full.min.js",
-              "src/assets/addons/gmap3.min.js",
-              "src/assets/js/main.js",
-              "src/assets/js/common.js"
+              "src/assets/addons/select2/dist/js/select2.full.min.js"
             ]
           },
           "configurations": {

@@ -144,7 +144,7 @@
   <div class="modal-body">
       <div class="row justify-content-center">
         <input type="text" class="form-control w-75" (change)="onOtpChange($event)" placeholder="123456">
-        <button (click)="submitOTP()" class="bg-primary">Continue</button>
+        <button (click)="submitOTP()" class="ps-btn">Continue</button>
       </div>
       <p class="text-center py-2" *ngIf="currentTime > 0">{{ currentTime * 1000 | date:'mm:ss' }}</p>
       <p class="text-center py-2" *ngIf="currentTime < 1">OTP code expired. <u role="button" style="cursor: pointer;" (click)="resendOTP()">Resend OTP</u></p>
