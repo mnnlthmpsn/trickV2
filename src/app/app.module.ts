@@ -41,6 +41,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { SearchComponent } from './pages/search/search.component';
+import { MobHeaderComponent } from './widgets/mob-header/mob-header.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { SearchComponent } from './pages/search/search.component';
     TransactionHistoryComponent,
     FaqComponent,
     SearchComponent,
+    MobHeaderComponent,
   ],
   imports: [
     BrowserModule,

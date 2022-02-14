@@ -1,0 +1,109 @@
+<header class="header header--mobile" data-sticky="true">
+    <div class="header__top">
+        <div class="header__left">
+            <p>Welcome to Trickles Online Shopping Store !</p>
+        </div>
+    </div>
+
+    <div class="navigation--mobile">
+        <div class="navigation__left"><a class="ps-logo"><img src="/assets/img/logo_light.png" alt=""></a>
+        </div>
+        <div class="navigation__right">
+            <div class="header__actions">
+                <!-- cart for mobile header -->
+                <div class="ps-cart--mini">
+                    <a class="header__extra" href="#">
+                        <i class="icon-bag2"></i>
+                        <span><i>0</i></span>
+                    </a>
+                </div>
+
+                <!-- mobile header actions -->
+                <div class="ps-block--user-header">
+                    <div class="ps-block__left"><i class="icon-user"></i></div>
+                    <div class="ps-block__right"><a href="my-account.html">Login</a><a
+                            href="my-account.html">Register</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- mobile search -->
+    <div class="ps-search--mobile">
+        <form class="ps-form--search-mobile" action="index.html" method="get">
+            <div class="form-group--nest">
+                <input class="form-control" type="text" placeholder="Search something...">
+                <button><i class="icon-magnifier"></i></button>
+            </div>
+        </form>
+    </div>
+</header>
+
+<!-- navigation at the bottom -->
+<div class="navigation--list">
+    <div class="navigation__content">
+        <!-- Menu -->
+        <a class="navigation__item ps-toggle--sidebar" href="#menu-mobile">
+            <i class="icon-menu"></i>
+            <span> Menu</span>
+        </a>
+
+        <!-- categories -->
+        <a class="navigation__item ps-toggle--sidebar" href="#navigation-mobile">
+            <i class="icon-list4"></i>
+            <span> Categories</span>
+        </a>
+
+        <!-- search -->
+        <a class="navigation__item ps-toggle--sidebar" href="#search-sidebar">
+            <i class="icon-magnifier"></i>
+            <span> Search</span>
+        </a>
+
+        <!-- Cart -->
+        <a class="navigation__item" href="/shopping-cart">
+            <i class="icon-bag2"></i>
+            <span> Cart</span>
+        </a>
+    </div>
+</div>
+
+<!-- sidebar categories -->
+<div class="ps-panel--sidebar" id="navigation-mobile">
+    <div class="ps-panel__header">
+        <h3>Categories</h3>
+    </div>
+    <div class="ps-panel__content">
+        <ul class="menu--mobile">
+            <app-category-menu></app-category-menu>
+        </ul>
+    </div>
+</div>
+
+<!-- sidebar search -->
+<div class="ps-panel--sidebar" id="search-sidebar">
+    <div class="ps-panel__header">
+        <form class="ps-form--search-mobile" action="index.html" method="get">
+            <div class="form-group--nest">
+                <input class="form-control" type="text" placeholder="Search something...">
+                <button><i class="icon-magnifier"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="navigation__content"></div>
+</div>
+
+<!-- sidebar menu -->
+<div class="ps-panel--sidebar" id="menu-mobile">
+    <div class="ps-panel__header">
+        <h3>Menu</h3>
+    </div>
+    <div class="ps-panel__content">
+        <ul class="menu--mobile">
+            <li *ngFor="let menu of menus">
+                <a href='{{ menu.route }}'>{{ menu.name }}</a>
+                <span class=""></span>
+            </li>
+        </ul>
+    </div>
+</div>

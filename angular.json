@@ -27,13 +27,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": [
               "src/assets/addons/jquery.min.js",
               "src/assets/addons/nouislider/nouislider.min.js",
               "src/assets/addons/popper.min.js",
+              "src/assets/addons/owl-carousel/owl.carousel.min.js",
               "src/assets/addons/bootstrap/js/bootstrap.min.js",
               "src/assets/addons/imagesloaded.pkgd.min.js",
               "src/assets/addons/masonry.pkgd.min.js",
@@ -44,7 +44,8 @@
               "src/assets/addons/slick-animation.min.js",
               "src/assets/addons/lightGallery-master/dist/js/lightgallery-all.min.js",
               "src/assets/addons/sticky-sidebar/dist/sticky-sidebar.min.js",
-              "src/assets/addons/select2/dist/js/select2.full.min.js"
+              "src/assets/addons/select2/dist/js/select2.full.min.js",
+              "src/assets/js/main.js"
             ]
           },
           "configurations": {

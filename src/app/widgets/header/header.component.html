@@ -1,226 +1,94 @@
-<header class="header header--market-place-3" data-sticky="true">
-
-  <!-- on scroll -->
-  <div class="header__top border-bottom">
-    <div class="container">
-      <div class="header__left">
-        <div class="menu--product-categories">
-          <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Categories</span></div>
-          <div class="menu__content">
-            <app-category-menu></app-category-menu>
+<header class="header header--standard header--market-place-1" data-sticky="true">
+  <div class="header__top">
+      <div class="container">
+          <div class="header__left">
+              <p>Welcome to Trickles Online Shopping Store !</p>
           </div>
-        </div>
-        <a class="ps-logo mainlogo" href="/">
-          <img src="assets/img/logo_light.png" alt="">
-        </a>
+          <div class="header__right">
+              <ul class="header__top-links">
+                  <li><a href="#">Store Location</a></li>
+                  <li><a href="#">Track Your Order</a></li>
+              </ul>
+          </div>
       </div>
+  </div>
+  <div class="header__content">
+      <div class="container">
+          <div class="header__content-left">
+              <div class="menu--product-categories">
+                  <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Categories</span></div>
+                  <div class="menu__content">
+                      <app-category-menu></app-category-menu>
+                  </div>
+              </div><a class="ps-logo"><img src="/assets/img/logo.png" alt=""></a>
+          </div>
+          <div class="header__content-center">
+              <form class="ps-form--quick-search" action="index.html" method="get">
 
-      <!-- search -->
-      <div class="header__center">
-        <form class="ps-form--quick-search" [formGroup]="searchForm" (ngSubmit)="searchItem()">
-          <input class="form-control" formControlName='search_name' type="text" placeholder="I'm shopping for...">
-          <button type="submit">Search</button>
-        </form>
-      </div>
+                  <input class="form-control border-left" type="text" placeholder="I'm shopping for...">
+                  <button>Search</button>
+              </form>
+          </div>
 
+          <div class="header__content-right">
+              <div class="header__actions">
+                  <div *ngIf="!!customer_id">
+                      <a class="header__extra mr-3" href="#">
+                          <i class="icon-heart"></i>
+                          <span><i>{{ favorite_items.length }}</i></span>
+                      </a>
+                      <a class="header__extra" href="#">
+                          <i class="icon-cart"></i>
+                          <span><i>{{ basket_items.length }}</i></span>
+                      </a>
+                  </div>
 
-      <div class="header__right">
-        <div class="header__actions">
-          <ng-container *ngIf="!!customer_id">
-            <a class="header__extra" href="/my-favorites" title="My Favorites">
-              <i class="icon-heart link"></i>
-              <span><i>{{fav_items_count}}</i></span>
-            </a>
-            <div class="ps-cart--mini">
-              <a class="header__extra" href="/shopping-cart" title="Shopping Basket">
-                <i class="icon-cart-full link"></i>
-                <span><i>{{basket_items_count}}</i></span>
-              </a>
-            </div>
-            <div class="ps-cart--mini">
-              <a class="header__extra" href="/shopping-my-items" title="My Confirmed Items">
-                <i class="icon-bag2 link"></i>
-                <span><i>{{confirmed_items_count}}</i></span>
-              </a>
-            </div>
-            <div class="vl"></div>
-          </ng-container>
-
-          <!-- login/register -->
-          <div class="ps-block--user-header">
-            <ng-container *ngIf="!!customer_id;else loginRegister">
-              <a href="/user-information">
-                <div class="ps-block__left">
-                  <i class="icon-user link"></i>
-                </div>
-              </a>
-            </ng-container>
-            <ng-template #loginRegister>
-              <div class="ps-block__right">
-                <a class="link" href="/my-account">Login/Register</a>
+                  <div class="ps-block--user-header">
+                      <ng-container *ngIf="!!customer_id; else unauthorized">
+                          <div class="ps-block__left"><i class="icon-user"></i></div>
+                          <div class="ps-block__right d-flex align-items-center">
+                              <a href="/user-information">Account</a>
+                          </div>
+                      </ng-container>
+                      <ng-template #unauthorized>
+                          <div class="ps-block__left"><i class="icon-user"></i></div>
+                          <div class="ps-block__right">
+                              <a href="/my-account">Login</a><a href="/my-account">Register</a>
+                          </div>
+                      </ng-template>
+                  </div>
               </div>
-            </ng-template>
           </div>
-        </div>
       </div>
-    </div>
   </div>
 
-
   <!-- on page -->
-  <nav class="navigation bg-white border-bottom">
-    <div class="container">
-      <div class="navigation__left">
-        <div class="menu--product-categories ">
-          <div class="menu__toggle deptmain py-3">
-            <i class="icon-menu text-dark"></i><span>Shop Categories</span>
+  <nav class="navigation">
+      <div class="container">
+          <div class="navigation__left">
+              <div class="menu--product-categories">
+                  <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Categories</span></div>
+                  <div class="menu__content">
+                      <app-category-menu></app-category-menu>
+                      <!-- <ul class="menu--dropdown">
+                          
+                      </ul> -->
+                  </div>
+              </div>
           </div>
-          <div class="menu__content">
-            <app-category-menu></app-category-menu>
+          <div class="navigation__right">
+              <ul class="menu">
+                  <li *ngFor="let menu of menus">
+                      <a href="{{ menu.route }}" class="link">{{menu.name}}</a>
+                  </li>
+              </ul>
+              <div class="ps-block--header-hotline inline">
+                  <p><i class="icon-telephone"></i>Hotline:<strong> 1-800-234-5678</strong></p>
+              </div>
           </div>
-        </div>
       </div>
-      <div class="navigation__right">
-        <ul class="menu">
-          <li class=""><a href="/">Home</a><span class=""></span>
-
-          </li>
-        </ul>
-        <div class="ps-block--header-hotline inline">
-          <a href="tel:0302955701">
-            <i class="icon-telephone"></i>
-            Hotline: 0302955701 /
-          </a>
-          <a href="tel:0302502257">
-            &nbsp;0302502257
-          </a>
-
-        </div>
-      </div>
-    </div>
   </nav>
 </header>
 
 <!-- mobile nav -->
-<header class="header header--mobile" data-sticky="true">
-  <div class="header__top">
-    <div class="header__left">
-      <p>Welcome to Trickles!</p>
-    </div>
-    <div class="header__right">
-      <ul class="navigation__extra">
-        <li><a href="#">Sell on Trickles</a></li>
-        <li><a href="#">Track your order</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="navigation--mobile">
-    <div class="navigation__left"><a class="ps-logo" href="/"><img src="assets/img/logo_light.png" alt=""></a></div>
-    <div class="navigation__right">
-      <div class="header__actions">
-        <ng-container *ngIf="!!customer_id">
-          <a class="header__extra" href="/my-favorites" title="My Favorites">
-            <i class="icon-heart text-white"></i>
-            <span><i>{{fav_items_count}}</i></span>
-          </a>
-          <div class="ps-cart--mini">
-            <a class="header__extra" href="/shopping-cart" title="Shopping Basket">
-              <i class="icon-cart-full text-white"></i>
-              <span><i>{{basket_items_count}}</i></span>
-            </a>
-          </div>
-          <div class="ps-cart--mini">
-            <a class="header__extra" href="/shopping-my-items" title="My Confirmed Items">
-              <i class="icon-bag2 text-white"></i>
-              <span><i>{{confirmed_items_count}}</i></span>
-            </a>
-          </div>
-          <div class="vl"></div>
-        </ng-container>
-        <div class="ps-block--user-header">
-          <ng-container *ngIf="!!customer_id;else loginRegister">
-            <a href="/user-information">
-              <div class="ps-block__left">
-                <i class="icon-user text-white"></i>
-              </div>
-            </a>
-          </ng-container>
-          <ng-template #loginRegister>
-            <div class="ps-block__right">
-              <a class="link" href="/my-account">Login/Register</a>
-            </div>
-          </ng-template>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="ps-search--mobile">
-    <form class="ps-form--search-mobile" [formGroup]="searchForm" (ngSubmit)="searchItem()">
-        <div class="form-group--nest">
-            <input class="form-control" type="text" placeholder="Search something..." formControlName="search_name">
-            <button type="submit"><i class="icon-magnifier"></i></button>
-        </div>
-    </form>
-</div>
-</header>
-
-<!-- categories mobile -->
-<div class="ps-panel--sidebar" id="navigation-mobile">
-  <div class="ps-panel__header">
-    <h3>Categories</h3>
-  </div>
-  <div class="ps-panel__content">
-    <ul class="menu--mobile">
-      <li class="current-menu-item menu-item-has-children has-mega-menu" *ngFor="let category of category_list_data">
-        <a class="cursor" (click)="navigateToCategoryDetails(category)">{{ category.product_cat_desc }}</a><span
-          class="sub-toggle"></span>
-        <div class="mega-menu">
-          <div class="mega-menu__column">
-      <li class="current-menu-item py-1" *ngFor="let item of category.sub_info">
-        <a class="cursor" (click)="navigateToSubCategoryDetails(item)">{{ item.product_type_desc }}</a>
-      </li>
-  </div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-
-<!-- mobile menu items -->
-<div class="navigation--list">
-  <div class="navigation__content"><a class="navigation__item ps-toggle--sidebar" href="#menu-mobile"><i
-        class="icon-menu"></i><span> Menu</span></a><a class="navigation__item ps-toggle--sidebar"
-      href="#navigation-mobile"><i class="icon-list4"></i><span> Categories</span></a><a
-      class="navigation__item ps-toggle--sidebar" href="#search-sidebar"><i class="icon-magnifier"></i><span>
-        Search</span></a><a class="navigation__item" href="/shopping-cart"><i
-        class="icon-bag2"></i><span> Cart</span></a></div>
-</div>
-
-<!-- mobile search -->
-<div class="ps-panel--sidebar" id="search-sidebar">
-  <div class="ps-panel__header">
-    <form class="ps-form--search-mobile" [formGroup]='searchForm' (ngSubmit)="searchItem()">
-      <div class="form-group--nest">
-        <input class="form-control" formControlName="search_name" type="text" placeholder="Search something...">
-        <button><i class="icon-magnifier"></i></button>
-      </div>
-    </form>
-  </div>
-  <div class="navigation__content"></div>
-</div>
-
-<!-- menu items -->
-<div class="ps-panel--sidebar" id="menu-mobile">
-  <div class="ps-panel__header">
-    <h3>Menu</h3>
-  </div>
-  <div class="ps-panel__content">
-    <ul class="menu--mobile">
-      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
-      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
-      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
-      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
-      <li class="menu-item"><a href="index.html">Home</a><span class="sub-toggle"></span></li>
-    </ul>
-  </div>
-</div>
+<app-mob-header [menus]="menus"></app-mob-header>
